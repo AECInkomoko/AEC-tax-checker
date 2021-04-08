@@ -8,6 +8,21 @@ Income = {{ income }}
 <br/>
 State = {{ state }}
 <br/>
+
+{% for arow in taxBracket %}
+<br/>
+{{ arow.taxType }}
+<br/>
+{{ arow.state }}
+<br/>
+{{ arow.filerType }}
+<br/>
+{{ arow.rangeMax }}
+<br/>
+{{ arow.rangeRate }}
+<br/>
+{% endfor %}
+
 <br/>
 <form action="{% url 'home'%}">
   <input type="submit" value="Home" class="btn btn-primary">
