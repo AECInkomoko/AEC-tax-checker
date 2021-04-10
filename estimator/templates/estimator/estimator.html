@@ -13,53 +13,9 @@ State = {{ state }}
 <br/>
 <br/>
 
-<div class="container">
-  <span class="border border-primary"><span>
-  <div class="row">
-    <div class="col-sm">
-      Tax Type
-    </div>
-    <div class="col-sm">
-      State
-    </div>
-    <div class="col-sm">
-      Filer Type
-    </div>
-    <div class="col-sm">
-      Range Max
-    </div>
-    <div class="col-sm">
-      Range Rate
-    </div>
-  </div>
-
-  {% for arow in taxBracket %}
-    <div class="row">
-      <div class="col-sm">
-        {{ arow.taxType }}
-      </div>
-      <div class="col-sm">
-        {{ arow.state }}
-      </div>
-      <div class="col-sm">
-        {{ arow.filerType }}
-      </div>
-      <div class="col-sm">
-        {{ arow.rangeMax }}
-      </div>
-      <div class="col-sm">
-        {{ arow.rangeRate }}
-      </div>
-    </div>
-  {% endfor %}
-  </span>
-</div>
-
-
 <table class="table">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">#</th>
       <th scope="col">Tax Type</th>
       <th scope="col">State</th>
       <th scope="col">Filer Type</th>
