@@ -1,5 +1,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 
+{% load static %}
+
 <div class="container text-center">
 <h1> Estimator Output Page! </h1>
 Income = {{ income }}
@@ -8,22 +10,80 @@ Income = {{ income }}
 <br/>
 State = {{ state }}
 <br/>
+<br/>
+<br/>
 
-{% for arow in taxBracket %}
-<br/>
-{{ arow.taxType }}
-<br/>
-{{ arow.state }}
-<br/>
-{{ arow.filerType }}
-<br/>
-{{ arow.rangeMax }}
-<br/>
-{{ arow.rangeRate }}
-<br/>
-{% endfor %}
+<div class="container">
+  <span class="border border-primary"><span>
+  <div class="row">
+    <div class="col-sm">
+      Tax Type
+    </div>
+    <div class="col-sm">
+      State
+    </div>
+    <div class="col-sm">
+      Filer Type
+    </div>
+    <div class="col-sm">
+      Range Max
+    </div>
+    <div class="col-sm">
+      Range Rate
+    </div>
+  </div>
+
+  {% for arow in taxBracket %}
+    <div class="row">
+      <div class="col-sm">
+        {{ arow.taxType }}
+      </div>
+      <div class="col-sm">
+        {{ arow.state }}
+      </div>
+      <div class="col-sm">
+        {{ arow.filerType }}
+      </div>
+      <div class="col-sm">
+        {{ arow.rangeMax }}
+      </div>
+      <div class="col-sm">
+        {{ arow.rangeRate }}
+      </div>
+    </div>
+  {% endfor %}
+  </span>
+</div>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tax Type</th>
+      <th scope="col">State</th>
+      <th scope="col">Filer Type</th>
+      <th scope="col">Range Max</th>
+      <th scope="col">Range Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for arow in taxBracket %}
+      <tr>
+        <td>{{ arow.taxType }}</td>
+        <td>{{ arow.state }}</td>
+        <td>{{ arow.filerType }}</td>
+        <td>{{ arow.rangeMax }}</td>
+        <td>{{ arow.rangeRate }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
 
 <br/>
+<br/>
+
 <form action="{% url 'home'%}">
   <input type="submit" value="Home" class="btn btn-primary">
 </form>
