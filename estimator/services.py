@@ -24,6 +24,19 @@ class TaxCalculator:
 
     #=IF($C$3>F3, IF (ISBLANK(F3),MAX(0, $C$3-F2), F3-F2), MAX(0,$C$3-F2))
 
+    federalTaxAmount = 0
+    stateWitholdAmount = 0
+
+
+    # IF (income > RangeMax)
+    #   IF RangeMax is 0 THEN
+    #     taxableIncome = income - PrevRangeMax
+    #   ELSE IF prevRangeMax = 0 THEN
+    #     taxableIncome = rangeMax
+    #   ELSE
+    #     taxableIncome = rangeMax -prevRangeMax
+    # END IF
+
     #for e in TaxBracket.objects.all():
     for e in TaxBracket.objects.all().filter(taxType="Federal"):
       print("Tax Type: " + e.taxType + " RangeMax: " + str(e.rangeMax))
