@@ -3,7 +3,9 @@
 {% load static %}
 
 <div class="container text-center">
-<h1> Estimator Output Page! </h1>
+
+<br>
+
 Income = {{ income }}
 <br/>
 # of Paychecks = {{ paychecks }}
@@ -11,9 +13,22 @@ Income = {{ income }}
 State = {{ state }}
 <br/>
 <br/>
-<br/>
 
-<table class="table">
+Your withhold amount is: {{ withholdAmount }}
+
+<br>
+<br>
+<!-- <h1> Estimator Output Page! </h1>
+Income = {{ income }}
+<br/>
+# of Paychecks = {{ paychecks }}
+<br/>
+State = {{ state }}
+<br/>
+<br/>
+<br/> -->
+
+<!-- <table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Tax Type</th>
@@ -35,12 +50,10 @@ State = {{ state }}
       </tr>
     {% endfor %}
   </tbody>
-</table>
-
-<br/>
-<br/>
+</table> -->
 
 <form action="{% url 'home'%}">
   <input type="submit" value="Home" class="btn btn-primary">
 </form>
+
 </div>

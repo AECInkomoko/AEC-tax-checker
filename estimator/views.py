@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import TaxBracket
 from .services import TaxCalculator
 
 # import the logging library
@@ -15,22 +14,28 @@ def home(request):
     return render(request, 'estimator/home.html', {})
 
 def estimator(request):
-
-    taxBracket = TaxBracket.objects.all();
+    print ("reached estimator")
     income = request.GET.get('income');
-    paychecks = request.GET.get('paychecks');
+    print ("1 retrieved " + str(income))
+    numPayChecks = request.GET.get('numPayChecks');
+    print ("2 retrieved " + str(numPayChecks))
     state = request.GET['state'];
-
+    print ("3 retrieved ")
 
     tc = TaxCalculator
-    income = tc.calculate(income)
-    logger.info('info: I told you so')
+    withholdAmount = tc.calculateWithholdAmount(income, numPayChecks, state)
+
+    print (withholdAmount)
+
+    # return render(request, 'estimator/estimator.html',
+    # {
+    #     'withholdAmount':withholdAmount,
+    # }
 
     return render(request, 'estimator/estimator.html',
         {'income':income,
-         'paychecks':paychecks,
+         'paychecks':numPayChecks,
          'state':state,
-         #'state':withholding,
-         'taxBracket':taxBracket,
+         'withholdAmount':withholdAmount,
         }
     );
