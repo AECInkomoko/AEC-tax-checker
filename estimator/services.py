@@ -7,8 +7,14 @@ class TaxCalculator:
   def computeFederalTax (income):
     print("entered computeFederalTax")
 
-    if income == "":
+    try:
+      test = int(income)
+    except ValueError:
       return 0
+
+    # if income == "":
+    #   return 0
+
     if int(income) == 0 :
       return 0
 
@@ -44,8 +50,14 @@ class TaxCalculator:
   def computeStateTax (income, userState):
     print("entered computeStateTax")
 
-    if income == "":
+    try:
+      test = int(income)
+    except ValueError:
       return 0
+
+    # if income == "":
+    #   return 0
+
     if int(income) == 0 :
       return 0
 
