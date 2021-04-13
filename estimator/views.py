@@ -14,18 +14,21 @@ def home(request):
     return render(request, 'estimator/home.html', {})
 
 def estimator(request):
-    print ("reached estimator")
     income = request.GET.get('income');
-    print ("1 retrieved " + str(income))
     numPayChecks = request.GET.get('numPayChecks');
-    print ("2 retrieved " + str(numPayChecks))
     state = request.GET['state'];
-    print ("3 retrieved ")
 
     tc = TaxCalculator
-    withholdAmount = tc.calculateWithholdAmount(income, numPayChecks, state)
+    fedTaxAmount = tc.computeFederalTax(income)
+    fedStandardDeduction = tc.getFederalStandardDeduction()
+    stateTaxAmount = tc.computeStateTax(income, state)
+    stateStandardDeduction = tc.getStateStandardDeduction()
 
-    print (withholdAmount)
+    print ("Federal Tax = " + str(fedTaxAmount))
+    print ("Federal Standard Deduction = " + str(fedStandardDeduction))
+
+    print ("State Tax = " + str(stateTaxAmount))
+    print ("State Standard Deduction = " + str(stateStandardDeduction))
 
     # return render(request, 'estimator/estimator.html',
     # {
@@ -33,9 +36,12 @@ def estimator(request):
     # }
 
     return render(request, 'estimator/estimator.html',
-        {'income':income,
-         'paychecks':numPayChecks,
-         'state':state,
-         'withholdAmount':withholdAmount,
+        {
+          'income':income,
+          'state':state,
+          'fedTaxAmount':fedTaxAmount,
+          'stateTaxAmount':stateTaxAmount,
+          'fedStandardDeduction':fedStandardDeduction,
+          'stateStandardDeduction':stateStandardDeduction,
         }
     );

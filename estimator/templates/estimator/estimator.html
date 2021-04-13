@@ -2,20 +2,27 @@
 
 {% load static %}
 
+<body style="background-color:#6495ED;">
+
 <div class="container text-center">
 
 <br>
 
 Income = {{ income }}
 <br/>
-# of Paychecks = {{ paychecks }}
-<br/>
 State = {{ state }}
 <br/>
 <br/>
 
-Your withhold amount is: {{ withholdAmount }}
+Federal Tax = {{ fedTaxAmount }}
+<br/>
+Federal Standard Deduction = {{ fedStandardDeduction }}
+<br>
+<br>
 
+State Tax = {{ stateTaxAmount }}
+<br>
+State Standard Deduction = {{ stateStandardDeduction }}
 <br>
 <br>
 <!-- <h1> Estimator Output Page! </h1>

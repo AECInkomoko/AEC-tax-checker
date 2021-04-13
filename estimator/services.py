@@ -4,51 +4,83 @@ from .models import TaxBracket
 
 class TaxCalculator:
 
-  # Get an instance of a logger
-  #logger = logging.getLogger(__name__)
+  def computeFederalTax (income):
+    print("entered computeFederalTax")
 
-  #def __init__(self, name):
-#self.name = name    # instance variable unique to each instance
-#    logger.error('Something went wrong!')
+    if income == "":
+      return 0
+    if int(income) == 0 :
+      return 0
 
-  def calculateWithholdAmount(income, numPayChecks, state):
-    #print ("Parameters Passed: " + income + " " + numPayChecks + " " + state)
-    #print ("Parameters Passed: " + income + " " + numPayChecks)
+    fedTaxAmount = 0
+    prevRangeMax = 0
 
-    print("entered calculateWithholdAmount")
-    #print("Param 1: " + str(income))
-    #print("Param 2: " + str(numPayChecks))
-    #print("Param 3: " + state)
+    for e in TaxBracket.objects.all().filter(taxType="Federal") :
+      rowTaxAmount = 0
+      if int(income) < e.rangeMax : #last income row
+        #print("last income row")
+        taxableIncome = int(income) - prevRangeMax
+        rowTaxAmount = taxableIncome * e.rangeRate
+        fedTaxAmount = fedTaxAmount + rowTaxAmount
+        break;
+      elif (e.rangeMax ==0) :
+        #print("last range row")
+        taxableIncome = int(income) - prevRangeMax
+      else : # all other rows
+        #print("middle rows")
+        taxableIncome = e.rangeMax - prevRangeMax
+      prevRangeMax = e.rangeMax
+      rowTaxAmount = taxableIncome * e.rangeRate
+      fedTaxAmount = fedTaxAmount + rowTaxAmount
+      # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
+      # " TaxableIncome = " + str(taxableIncome) + " Federal Tax = " + str(fedTaxAmount))
 
-    #taxBracket = TaxBracket.objects.all()
+    percentage = fedTaxAmount / int(income) * 100
+    print("Federal Percentage: " + str(percentage))
 
-    #=IF($C$3>F3, IF (ISBLANK(F3),MAX(0, $C$3-F2), F3-F2), MAX(0,$C$3-F2))
-
-    federalTaxAmount = 0
-    stateWitholdAmount = 0
+    return fedTaxAmount;
 
 
-    # IF (income > RangeMax)
-    #   IF RangeMax is 0 THEN
-    #     taxableIncome = income - PrevRangeMax
-    #   ELSE IF prevRangeMax = 0 THEN
-    #     taxableIncome = rangeMax
-    #   ELSE
-    #     taxableIncome = rangeMax -prevRangeMax
-    # END IF
+  def computeStateTax (income, userState):
+    print("entered computeStateTax")
 
-    #for e in TaxBracket.objects.all():
-    for e in TaxBracket.objects.all().filter(taxType="Federal"):
-      print("Tax Type: " + e.taxType + " RangeMax: " + str(e.rangeMax))
+    if income == "":
+      return 0
+    if int(income) == 0 :
+      return 0
 
-    for e in TaxBracket.objects.all().filter(taxType="State"):
-      print("Tax Type: " + e.taxType + " RangeMax: " + str(e.rangeMax))
+    stateTaxAmount = 0
+    prevRangeMax = 0
 
-    #income = income
-    #paychecks = numPayChecks
-    #state = state
+    for e in TaxBracket.objects.all().filter(taxType="State", state=userState) :
+      rowTaxAmount = 0
+      if int(income) < e.rangeMax : #last income row
+        #print("last income row")
+        taxableIncome = int(income) - prevRangeMax
+        rowTaxAmount = taxableIncome * e.rangeRate
+        stateTaxAmount = stateTaxAmount + rowTaxAmount
+        break;
+      elif (e.rangeMax ==0) :
+        #print("last range row")
+        taxableIncome = int(income) - prevRangeMax
+      else : # all other rows
+        #print("middle rows")
+        taxableIncome = e.rangeMax - prevRangeMax
+      prevRangeMax = e.rangeMax
+      rowTaxAmount = taxableIncome * e.rangeRate
+      stateTaxAmount = stateTaxAmount + rowTaxAmount
+      # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
+      #  " TaxableIncome = " + str(taxableIncome) + " State Tax = " + str(stateTaxAmount))
 
-    witholdAmount = 400
-    #(income * .4)/numPayChecks
+    percentage = stateTaxAmount / int(income) * 100
+    print("State Tax Percentage: " + str(percentage))
 
-    return witholdAmount;
+    return stateTaxAmount;
+
+  def getFederalStandardDeduction () :
+    standardDeduction = 25100
+    return standardDeduction
+
+  def getStateStandardDeduction () :
+    standardDeduction = 9202
+    return standardDeduction
