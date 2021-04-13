@@ -33,9 +33,20 @@
   <!-- <div class="form-group"> -->
 
   <div class="container px-4">
+
+    <div class="col">
+      <input type="radio" id="single" name="filerType" value="Single">
+        <label for="single">Single Filer</label>
+      <input type="radio" id="joint" name="filerType" value="Joint" checked>
+        <label for="joint">Married Filing Jointly</label><br>
+    </div>
+    <br>
+    <br>
+
     <div class="row gx-5">
       <div class="col">
-       <div class="p-3 border bg-light">Your Annual Income</div>
+       <!-- <div class="p-3 border bg-light">Your Annual Income</div> -->
+       <div >Your Annual Income</div>
        <div class="input-group mb-3">
          <div class="input-group-prepend">
            <span class="input-group-text">$</span>
@@ -46,8 +57,11 @@
          </div>
        </div>
       </div>
+
       <div class="col">
-        <div class="p-3 border bg-light">Select Your State</div>
+        <!-- <div class="p-3 border bg-light">Select Your State</div> -->
+        <div >Select Your State</div>
+
         <label for="state" class="col-sm-2 control-label"></label>
         <div class="col-sm-10">
         <select class="form-control" id="state" name="state">
@@ -106,6 +120,12 @@
         <select/>
         </div>
       </div>
+
+      <!-- <input type="radio" id="single" name="filerType" value="single" checked>
+        <label for="single">Single Filer</label>
+      <input type="radio" id="joint" name="filerType" value="joint">
+        <label for="joint">Married Filing Jointly</label><br> -->
+
     </div>
   </div>
 
@@ -120,6 +140,6 @@
   <br/>
   <br/>
 
-    <input type="submit" value="Estimate" class="btn btn-primary">
+    <input type="submit" value="Estimate My Taxes" class="btn btn-primary">
 </form>
 </center>

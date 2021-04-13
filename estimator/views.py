@@ -14,14 +14,15 @@ def home(request):
     return render(request, 'estimator/home.html', {})
 
 def estimator(request):
+
+    filerType = request.GET.get('filerType');
     income = request.GET.get('income');
-    numPayChecks = request.GET.get('numPayChecks');
     state = request.GET['state'];
 
     tc = TaxCalculator
-    fedTaxAmount = tc.computeFederalTax(income)
+    fedTaxAmount = tc.computeFederalTax(income, filerType)
     fedStandardDeduction = tc.getFederalStandardDeduction()
-    stateTaxAmount = tc.computeStateTax(income, state)
+    stateTaxAmount = tc.computeStateTax(income, filerType, state)
     stateStandardDeduction = tc.getStateStandardDeduction()
 
     print ("Federal Tax = " + str(fedTaxAmount))
