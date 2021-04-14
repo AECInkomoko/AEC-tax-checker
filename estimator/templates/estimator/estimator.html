@@ -8,60 +8,94 @@
 <div class="container text-center">
 
 <br>
-
-Income = {{ income }}
-<br/>
-State = {{ state }}
-<br/>
-<br/>
-
-<!-- {{ floatvalue|floatformat:2|intcomma }} -->
-
-
-Federal Tax = {{ fedTaxAmount|floatformat:2|intcomma }}
-<br/>
-Federal Standard Deduction = {{ fedStandardDeduction }}
 <br>
 <br>
 
-State Tax = {{ stateTaxAmount|floatformat:2|intcomma }}
-<br>
-State Standard Deduction = {{ stateStandardDeduction }}
-<br>
-<br>
-<!-- <h1> Estimator Output Page! </h1>
-Income = {{ income }}
-<br/>
-# of Paychecks = {{ paychecks }}
-<br/>
-State = {{ state }}
-<br/>
-<br/>
-<br/> -->
+<p style="color:white">Federal Tax</p>
+  Anticipated Income  = {{ income|floatformat:2|intcomma }}
+  <br>
+  Standard Deduction = {{ fedStandardDeduction|floatformat:2|intcomma }}
+  <br>
+  Estimated Federal Tax = {{ fedTaxAmount|floatformat:2|intcomma }}
+  <br>
+  <br>
+  <p style="color:white">{{ state }} State Tax</p>
+  Anticipated Income  = {{ income|floatformat:2|intcomma }}
+  <br>
+  Standard Deduction = {{ stateStandardDeduction|floatformat:2|intcomma }}
+  <br>
+  Estimated State Tax = {{ stateTaxAmount|floatformat:2|intcomma }}
+  <br>
+  <br>
 
-<!-- <table class="table">
+<p style="color:white">Total Estimated Tax = {{ totalTaxAmount|floatformat:2|intcomma }}</p>
+
+The amount you should withhold per pay check to minimize tax surprises = {{ paystubAmount|floatformat:2|intcomma }}
+<br>
+<br>
+  * This assumes 26 paychecks per year
+  <br>
+  * This is a guesstimate based on very simple calculations
+  <br>
+  * Please talk to a tax professional for accurate tax calculations
+  <br>
+<br>
+
+<p style="color:white">Federal Tax Bracket</p>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Tax Type</th>
+      <th scope="col">Filer Type</th>
+      <th scope="col">Up To Amount</th>
+      <th scope="col">Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for arow in fedTaxBracket %}
+      <tr>
+        <td>{{ arow.taxType }}</td>
+        <td>{{ arow.filerType }}</td>
+        {% if arow.rangeMax == 0 %}
+          <td>{{ "" }}</td>
+        {% else %}
+          <td>{{ arow.rangeMax }}</td>
+        {% endif %}
+        <td>{{ arow.rangeRate }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br>
+<p style="color:white">State Tax Bracket</p><br>
+<table class="table">
   <thead class="thead-dark">
     <tr>
       <th scope="col">Tax Type</th>
       <th scope="col">State</th>
       <th scope="col">Filer Type</th>
-      <th scope="col">Range Max</th>
-      <th scope="col">Range Rate</th>
+      <th scope="col">Up To Amount</th>
+      <th scope="col">Rate</th>
     </tr>
   </thead>
   <tbody>
-
-    {% for arow in taxBracket %}
+    {% for arow in stateTaxBracket %}
       <tr>
         <td>{{ arow.taxType }}</td>
         <td>{{ arow.state }}</td>
         <td>{{ arow.filerType }}</td>
-        <td>{{ arow.rangeMax }}</td>
+        {% if arow.rangeMax == 0 %}
+          <td>{{ "" }}</td>
+        {% else %}
+          <td>{{ arow.rangeMax }}</td>
+        {% endif %}
         <td>{{ arow.rangeRate }}</td>
       </tr>
     {% endfor %}
   </tbody>
-</table> -->
+</table>
 
 <form action="{% url 'home'%}">
   <input type="submit" value="Home" class="btn btn-primary">
