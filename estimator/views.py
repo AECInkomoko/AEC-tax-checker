@@ -18,6 +18,13 @@ def estimator(request):
     # Get the input parameters
     filerType = request.GET.get('filerType');
     income = request.GET.get('income');
+
+    try:
+      test = int(income)
+    except ValueError:
+      income = 0
+      return render(request, 'estimator/estimator.html')
+
     state = request.GET['state'];
 
     # Compute Federal Tax stuff

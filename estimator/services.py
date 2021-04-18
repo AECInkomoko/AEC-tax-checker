@@ -8,13 +8,13 @@ class TaxCalculator:
   def computeFederalTax (income, userFilerType):
     print("entered computeFederalTax: " + str(income) + " " + userFilerType)
 
-    try:
-      test = income
-    except ValueError:
-      return 0
-
-    if income == 0 :
-      return 0
+    # try:
+    #   test = income
+    # except ValueError:
+    #   return 0
+    #
+    # if income == 0 :
+    #   return 0
 
     fedTaxAmount = 0
     prevRangeMax = 0
@@ -50,38 +50,31 @@ class TaxCalculator:
   def computeStateTax (income, userFilerType, userState):
     print("entered computeStateTax: " + str(income) + " " + userFilerType + " " + userState)
 
-    try:
-      test = income
-    except ValueError:
-      return 0
-
-    if income == 0 :
-      return 0
-
     stateTaxAmount = 0
     prevRangeMax = 0
 
     stateTaxBracket = TaxBracket.objects.all().filter(taxType="State", filerType=userFilerType, state=userState)
 
     for e in stateTaxBracket :
+      print(stateTaxBracket)
       rowTaxAmount = 0
       if income < e.rangeMax : #last income row
-        # print("last income row")
+        #print("last income row")
         taxableIncome = income - prevRangeMax
         rowTaxAmount = taxableIncome * e.rangeRate
         stateTaxAmount = stateTaxAmount + rowTaxAmount
         break;
       elif (e.rangeMax == 0) :
-        # print("last range row")
+        #print("last range row")
         taxableIncome = income - prevRangeMax
       else : # all other rows
-        # print("middle rows")
+        #print("middle rows")
         taxableIncome = e.rangeMax - prevRangeMax
       prevRangeMax = e.rangeMax
       rowTaxAmount = taxableIncome * e.rangeRate
       stateTaxAmount = stateTaxAmount + rowTaxAmount
       # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
-      #   " TaxableIncome = " + str(taxableIncome) + " State Tax = " + str(stateTaxAmount))
+      #    " TaxableIncome = " + str(taxableIncome) + " State Tax = " + str(stateTaxAmount))
 
     percentage = (stateTaxAmount / income) * 100
     print("State Tax Percentage: " + str(percentage))
