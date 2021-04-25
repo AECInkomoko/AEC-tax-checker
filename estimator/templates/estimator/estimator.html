@@ -29,7 +29,7 @@
       <div class="col-lg-4">
         <center>
           <form action="{% url 'home'%}">
-            <input type="submit" value="Go Back" class="btn btn-primary">
+            <input type="submit" value="Go Back" class="btn btn-warning">
           </form>
         </center>
       </div>
@@ -52,7 +52,7 @@
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-1">
-        <div class="alert alert-warning">
+        <div class="alert alert-success">
           <center>
             <strong>
               <p>Income</p>
@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="col-lg-1">
-        <div class="alert alert-warning">
+        <div class="alert alert-success">
           <center>
             <strong>
               <p>Total Tax</p>
@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="col-lg-1">
-        <div class="alert alert-warning">
+        <div class="alert alert-success">
           <center>
             <strong><p>Effective Rate</p></strong>
               <p>{{ effectiveRate|floatformat:2|intcomma }} %</p>
@@ -80,7 +80,7 @@
         </div>
       </div>
       <div class="col-lg-1">
-        <div class="alert alert-warning">
+        <div class="alert alert-success">
           <center>
             <strong>
               <p>Withholding </p>
@@ -100,7 +100,7 @@
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-2">
-        <div class="alert alert-success">
+        <div class="alert alert-warning">
           <center>
             <strong><p>Federal</p></strong>
             <p>Standard Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }} </p>
@@ -113,7 +113,7 @@
       </div>
 
       <div class="col-lg-2">
-        <div class="alert alert-info">
+        <div class="alert alert-warning">
           <center>
             <strong><p>State</p></strong>
             <p>Standard Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
@@ -134,7 +134,7 @@
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-2">
-        <div class="alert alert-success">
+        <div class="alert alert-info">
           <center>
             <strong>
               <p>Federal Tax Brackets</p>
@@ -204,7 +204,7 @@
       <div class="col-lg-4">
         <center>
           <form action="{% url 'home'%}">
-            <input type="submit" value="Go Back" class="btn btn-primary">
+            <input type="submit" value="Go Back" class="btn btn-warning">
           </form>
         </center>
       </div>
