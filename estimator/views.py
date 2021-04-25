@@ -46,7 +46,19 @@ def estimator(request):
 
     # Compute Total Tax stuff
     totalTaxAmount = fedTaxAmount + stateTaxAmount
-    paystubAmount = round(totalTaxAmount / 26)
+    print ("totalTaxAmount " + str(totalTaxAmount))
+    print ("income " + income)
+    effectiveRate = round(100*int(totalTaxAmount)/int(income))
+    print("effectiveRate " + str(effectiveRate))
+    withholdAmount = round(totalTaxAmount/12)
+
+    # Compute Fed Tax stuff
+    fedEffectiveRate = round(100*fedTaxAmount/int(income))
+    fedWithholdAmount = round(fedTaxAmount/12)
+
+    # Compute State Tax stuff
+    stateEffectiveRate = round(100*stateTaxAmount/int(income))
+    stateWithholdAmount = round(stateTaxAmount/12)
 
     fedTaxBracket = tc.getFederalTaxBracket(taxableIncome, filerType)
     stateTaxBracket = tc.getStateTaxBracket(taxableIncome, filerType, state)
@@ -54,13 +66,18 @@ def estimator(request):
     return render(request, 'estimator/estimator.html',
         {
           'income':income,
-          'state':state,
-          'fedTaxAmount':fedTaxAmount,
-          'stateTaxAmount':stateTaxAmount,
-          'fedStandardDeduction':fedStandardDeduction,
-          'stateStandardDeduction':stateStandardDeduction,
           'totalTaxAmount':totalTaxAmount,
-          'paystubAmount':paystubAmount,
+          'effectiveRate':effectiveRate,
+          'withholdAmount':withholdAmount,
+          'fedStandardDeduction':fedStandardDeduction,
+          'fedTaxAmount':fedTaxAmount,
+          'fedEffectiveRate':fedEffectiveRate,
+          'fedWithholdAmount':fedWithholdAmount,
+          'state':state,
+          'stateStandardDeduction':stateStandardDeduction,
+          'stateTaxAmount':stateTaxAmount,
+          'stateEffectiveRate':stateEffectiveRate,
+          'stateWithholdAmount':stateWithholdAmount,
           'fedTaxBracket':fedTaxBracket,
           'stateTaxBracket':stateTaxBracket,
         }

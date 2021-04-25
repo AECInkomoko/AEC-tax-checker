@@ -19,156 +19,197 @@
 {% load humanize %}
 
 <body>
+  </br>
+
   <div class="container-fluid">
-    <div class"row">
+
+    <!-- Button Row -->
+    <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
-
-        </br>
-        </br>
         <center>
           <form action="{% url 'home'%}">
-            <input type="submit" value="Home" class="btn btn-primary">
+            <input type="submit" value="Go Back" class="btn btn-primary">
           </form>
         </center>
-        </br>
-        </br>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
 
-        <div class="alert alert-danger">
+    <!-- Heading Row -->
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        <center>
+          <H3 style="color:Gray">Estimated Taxes & Withholding</H3>
+        </center>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
+    </br>
+
+    <!-- Summary Row -->
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-1">
+        <div class="alert alert-warning">
           <center>
             <strong>
-              <p>Total Estimated Tax = {{ totalTaxAmount|floatformat:2|intcomma }}</p>
+              <p>Income</p>
             </strong>
+            <p>${{ income|floatformat:2|intcomma }} </p>
           </center>
         </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="alert alert-warning">
+          <center>
+            <strong>
+              <p>Total Tax</p>
+            </strong>
+            <p>${{ totalTaxAmount|floatformat:2|intcomma }}</p>
+          </center>
+        </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="alert alert-warning">
+          <center>
+            <strong><p>Effective Rate</p></strong>
+              <p>{{ effectiveRate|floatformat:2|intcomma }} %</p>
+          </center>
+        </div>
+      </div>
+      <div class="col-lg-1">
+        <div class="alert alert-warning">
+          <center>
+            <strong>
+              <p>Withholding </p>
+            </strong>
+            <p>${{ withholdAmount|floatformat:2|intcomma }}</p>
+          </center>
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
+    </div>
 
+    </br>
+
+
+    <!-- Federal + State Row-->
+
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-2">
+        <div class="alert alert-success">
+          <center>
+            <strong><p>Federal</p></strong>
+            <p>Standard Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }} </p>
+            <p>Tax Obligation: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
+            <p>Effective Rate: {{ fedEffectiveRate|floatformat:2|intcomma }} %</p>
+            <p>Monthly Withholding: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
+            <br>
+          </center>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
         <div class="alert alert-info">
           <center>
-            <p <strong>Federal Tax</strong></p>
-            Anticipated Income  = {{ income|floatformat:2|intcomma }}
-            <br>
-            Standard Deduction = {{ fedStandardDeduction|floatformat:2|intcomma }}
-            <br>
-            Estimated Federal Tax = {{ fedTaxAmount|floatformat:2|intcomma }}
-            <br>
+            <strong><p>State</p></strong>
+            <p>Standard Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
+            <p>Tax Obligation: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
+            <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
+            <p>Monthly Withholding: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
             <br>
           </center>
         </div>
-      <div class="alert alert-info">
-        <center>
-          <p <strong>{{ state }} State Tax</strong></p>
-          Anticipated Income  = {{ income|floatformat:2|intcomma }}
-          <br>
-          Standard Deduction = {{ stateStandardDeduction|floatformat:2|intcomma }}
-          <br>
-          Estimated State Tax = {{ stateTaxAmount|floatformat:2|intcomma }}
-          <br>
-          <br>
-        </center>
       </div>
 
-      <div class="alert alert-success">
-        <center>
-        The amount you should withhold per pay check to minimize tax surprises = {{ paystubAmount|floatformat:2|intcomma }}
-        <br>
-        <br>
-          * This assumes 26 paychecks per year
-        <br>
-          * This is a guesstimate based on very simple calculations
-        <br>
-          * Please talk to a tax professional for accurate tax calculations
-        <br>
-        <br>
-        </center>
-      </div>
-      </br>
-    <center>
-      <form action="{% url 'home'%}">
-        <input type="submit" value="Home" class="btn btn-primary">
-      </form>
-    </center>
-
+      <div class="col-lg-4"></div>
     </div>
 
-    <div class="col-lg-1"></div>
+    </br>
 
-    <div class="col-lg-1">
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
-      <!-- <p style="color:white">Federal Tax Bracket</p> -->
-
-      <div class="alert alert-danger">
-        <center>
-          <strong>
-            <p>Federal Tax Brackets</p>
-          </strong>
-        </center>
+    <!-- Federal + State Tax Brackets Row -->
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-2">
+        <div class="alert alert-success">
+          <center>
+            <strong>
+              <p>Federal Tax Brackets</p>
+              </br>
+            </strong>
+          </center>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for arow in fedTaxBracket %}
+              <tr>
+                {% if arow.rangeMax == 0 %}
+                <td>{{ "" }}</td>
+                    {% else %}
+                <td>${{ arow.rangeMax|floatformat:2|intcomma }}</td>
+                    {% endif %}
+                <td>{{ arow.rangeRate|floatformat:2|intcomma }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <br>
       </div>
 
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Amount</th>
-            <th scope="col">Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for arow in fedTaxBracket %}
-          <tr>
-            {% if arow.rangeMax == 0 %}
-            <td>{{ "" }}</td>
-                {% else %}
-            <td>{{ arow.rangeMax }}</td>
-                {% endif %}
-            <td>{{ arow.rangeRate }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-      <br>
+      <!-- State Tax Brackets Row -->
+      <div class="col-lg-2">
+        <div class="alert alert-info">
+          <center>
+            <strong>
+              <p>State Tax Brackets</p>
+            </strong>
+          </center>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Amount</th>
+                <th scope="col">Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for arow in stateTaxBracket %}
+              <tr>
+                {% if arow.rangeMax == 0 %}
+                <td>{{ "" }}</td>
+                  {% else %}
+                <td>${{ arow.rangeMax|floatformat:2|intcomma }}</td>
+                  {% endif %}
+                <td>{{ arow.rangeRate }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-4"></div>
     </div>
 
-    <div class="col-lg-1">
-      <!-- <p style="color:white">State Tax Bracket</p><br> -->
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
-      </br>
-
-      <div class="alert alert-danger">
+    <!-- Button Row -->
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
         <center>
-          <strong>
-            <p>State Tax Brackets</p>
-          </strong>
+          <form action="{% url 'home'%}">
+            <input type="submit" value="Go Back" class="btn btn-primary">
+          </form>
         </center>
       </div>
-
-      <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Amount</th>
-            <th scope="col">Rate</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for arow in stateTaxBracket %}
-          <tr>
-            {% if arow.rangeMax == 0 %}
-            <td>{{ "" }}</td>
-              {% else %}
-            <td>{{ arow.rangeMax }}</td>
-              {% endif %}
-            <td>{{ arow.rangeRate }}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+      <div class="col-lg-4"></div>
     </div>
+
   </div>
 </body>
