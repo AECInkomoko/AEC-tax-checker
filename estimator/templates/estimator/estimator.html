@@ -144,7 +144,7 @@
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
-                <th scope="col">Amount</th>
+                <th scope="col">Range Max</th>
                 <th scope="col">Rate</th>
               </tr>
             </thead>
@@ -182,7 +182,7 @@
             <table class="table table-striped">
               <thead class="thead-dark">
                 <tr>
-                  <th scope="col">Amount</th>
+                  <th scope="col">Range Max</th>
                   <th scope="col">Rate</th>
                 </tr>
               </thead>
@@ -192,7 +192,7 @@
                     {% if arow.rangeMax == 0 %}
                     <td>{{ "" }}</td>
                       {% else %}
-                    <td>${{ arow.rangeMax|floatformat:2|intcomma }}</td>
+                    <td> ${{ arow.rangeMax|floatformat:2|intcomma }}</td>
                       {% endif %}
                     <td>{{ arow.rangeRate }} %</td>
                   </tr>
