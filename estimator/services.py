@@ -53,6 +53,9 @@ class TaxCalculator:
     stateTaxAmount = 0
     prevRangeMax = 0
 
+    if userFilerType == "Head" :
+      userFilerType="Joint"
+
     stateTaxBracket = TaxBracket.objects.all().filter(taxType="State", filerType=userFilerType, state=userState)
 
     for e in stateTaxBracket :
@@ -88,6 +91,10 @@ class TaxCalculator:
 
   # BEGINNING OF THE METHOD getStateStandardDeduction
   def getStateStandardDeduction (userFilerType, userState) :
+
+    if userFilerType == "Head" :
+      userFilerType="Joint"
+
     stateDeduction = StateDeduction.objects.all().filter(state=userState)
     for e in stateDeduction :
       if userFilerType == "Single" :
@@ -104,6 +111,9 @@ class TaxCalculator:
     return fedTaxBracket
 
   def getStateTaxBracket (userFilerType, userState):
+    if userFilerType == "Head" :
+      userFilerType="Joint"
+
     stateTaxBracket = TaxBracket.objects.all().filter(taxType="State", filerType=userFilerType, state=userState)
 
     # if len(stateTaxBracket) == 0:
