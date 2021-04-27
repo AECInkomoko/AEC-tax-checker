@@ -115,7 +115,7 @@
       <div class="col-lg-3">
         <div class="alert alert-success">
           <center>
-            <strong><p>State</p></strong>
+            <strong><p>State ({{ state }})</p></strong>
             <p>Standard Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
             <p>Tax Obligation: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
@@ -171,7 +171,7 @@
         <div class="alert alert-info">
           <center>
             <strong>
-              <p>State Tax Brackets</p>
+              <p>State Tax Brackets ({{ state }})</p>
               </br>
             </strong>
           </center>
