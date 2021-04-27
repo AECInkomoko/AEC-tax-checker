@@ -32,6 +32,8 @@ def estimator(request):
     fedStandardDeduction = tc.getFederalStandardDeduction()
     taxableIncome = int(income) - int(fedStandardDeduction)
     fedTaxAmount = tc.computeFederalTax(taxableIncome, filerType)
+    if fedTaxAmount < 0 :
+      fedTaxAmount = 0
 
     print ("Federal Tax = " + str(fedTaxAmount))
     print ("Federal Standard Deduction = " + str(fedStandardDeduction))
@@ -40,6 +42,9 @@ def estimator(request):
     stateStandardDeduction = tc.getStateStandardDeduction(filerType, state)
     taxableIncome = int(income) - int(stateStandardDeduction)
     stateTaxAmount = tc.computeStateTax(taxableIncome, filerType, state)
+
+    if stateTaxAmount < 0 :
+      stateTaxAmount = 0
 
     print ("State Tax = " + str(stateTaxAmount))
     print ("State Standard Deduction = " + str(stateStandardDeduction))
