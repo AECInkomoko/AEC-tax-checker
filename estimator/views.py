@@ -33,13 +33,13 @@ def estimator(request):
     taxableIncome = int(income) - int(fedStandardDeduction)
     fedTaxAmount = tc.computeFederalTax(taxableIncome, filerType)
 
-    # Compute State Tax stuff
-    stateStandardDeduction = tc.getStateStandardDeduction()
-    taxableIncome = int(income) - int(stateStandardDeduction)
-    stateTaxAmount = tc.computeStateTax(taxableIncome, filerType, state)
-
     print ("Federal Tax = " + str(fedTaxAmount))
     print ("Federal Standard Deduction = " + str(fedStandardDeduction))
+
+    # Compute State Tax stuff
+    stateStandardDeduction = tc.getStateStandardDeduction(filerType, state)
+    taxableIncome = int(income) - int(stateStandardDeduction)
+    stateTaxAmount = tc.computeStateTax(taxableIncome, filerType, state)
 
     print ("State Tax = " + str(stateTaxAmount))
     print ("State Standard Deduction = " + str(stateStandardDeduction))
@@ -48,20 +48,20 @@ def estimator(request):
     totalTaxAmount = fedTaxAmount + stateTaxAmount
     print ("totalTaxAmount " + str(totalTaxAmount))
     print ("income " + income)
-    effectiveRate = round(100*int(totalTaxAmount)/int(income))
+    effectiveRate = round(100*int(totalTaxAmount)/int(income), 2)
     print("effectiveRate " + str(effectiveRate))
-    withholdAmount = round(totalTaxAmount/12)
+    withholdAmount = round(totalTaxAmount/12, 2)
 
     # Compute Fed Tax stuff
-    fedEffectiveRate = round(100*fedTaxAmount/int(income))
-    fedWithholdAmount = round(fedTaxAmount/12)
+    fedEffectiveRate = round(100*fedTaxAmount/int(income), 2)
+    fedWithholdAmount = round(fedTaxAmount/12, 2)
 
     # Compute State Tax stuff
-    stateEffectiveRate = round(100*stateTaxAmount/int(income))
-    stateWithholdAmount = round(stateTaxAmount/12)
+    stateEffectiveRate = round(100*stateTaxAmount/int(income), 2)
+    stateWithholdAmount = round(stateTaxAmount/12, 2)
 
-    fedTaxBracket = tc.getFederalTaxBracket(taxableIncome, filerType)
-    stateTaxBracket = tc.getStateTaxBracket(taxableIncome, filerType, state)
+    fedTaxBracket = tc.getFederalTaxBracket(filerType)
+    stateTaxBracket = tc.getStateTaxBracket(filerType, state)
 
     return render(request, 'estimator/estimator.html',
         {

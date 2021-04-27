@@ -1,6 +1,7 @@
 # import the logging library
 import logging
 from .models import TaxBracket
+from .models import StateDeduction
 
 class TaxCalculator:
 
@@ -40,7 +41,6 @@ class TaxCalculator:
       fedTaxAmount = fedTaxAmount + rowTaxAmount
       # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
       #   " TaxableIncome = " + str(taxableIncome) + " Federal Tax = " + str(fedTaxAmount))
-
     percentage = fedTaxAmount / income * 100
     print("Federal Percentage: " + str(percentage))
 
@@ -56,7 +56,7 @@ class TaxCalculator:
     stateTaxBracket = TaxBracket.objects.all().filter(taxType="State", filerType=userFilerType, state=userState)
 
     for e in stateTaxBracket :
-      print(stateTaxBracket)
+      print("Range Max " + str(e.rangeMax))
       rowTaxAmount = 0
       if income < e.rangeMax : #last income row
         #print("last income row")
@@ -87,14 +87,29 @@ class TaxCalculator:
     return standardDeduction
 
   # BEGINNING OF THE METHOD getStateStandardDeduction
-  def getStateStandardDeduction () :
-    standardDeduction = 9202
+  def getStateStandardDeduction (userFilerType, userState) :
+    stateDeduction = StateDeduction.objects.all().filter(state=userState)
+    for e in stateDeduction :
+      if userFilerType == "Single" :
+        standardDeduction = e.singleAmount
+      else :
+        standardDeduction = e.coupleAmount
     return standardDeduction
 
-  def getFederalTaxBracket (income, userFilerType):
+  def getFederalTaxBracket (userFilerType):
     fedTaxBracket = TaxBracket.objects.all().filter(taxType="Federal", filerType=userFilerType)
+    for n in range(len(fedTaxBracket)):
+      fedTaxBracket[n].rangeRate = round(100 * fedTaxBracket[n].rangeRate, 2)
+
     return fedTaxBracket
 
-  def getStateTaxBracket (income, userFilerType, userState):
+  def getStateTaxBracket (userFilerType, userState):
     stateTaxBracket = TaxBracket.objects.all().filter(taxType="State", filerType=userFilerType, state=userState)
+
+    # if len(stateTaxBracket) == 0:
+    #   print("List is empty")
+
+    for n in range(len(stateTaxBracket)):
+      stateTaxBracket[n].rangeRate = round(100 * stateTaxBracket[n].rangeRate, 2)
+
     return stateTaxBracket
