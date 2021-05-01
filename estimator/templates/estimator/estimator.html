@@ -23,25 +23,12 @@
 
   <div class="container-fluid">
 
-    <!-- Button Row -->
-    <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
-        <center>
-          <form action="{% url 'home'%}">
-            <input type="submit" value="Go Back" class="btn btn-warning">
-          </form>
-        </center>
-      </div>
-      <div class="col-lg-4"></div>
-    </div>
-
     <!-- Heading Row -->
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <center>
-          <H3 style="color:Gray">Estimated Taxes & Withholding</H3>
+          <H3 style="color:Gray">Estimated Taxes & Monthly Withholding</H3>
         </center>
       </div>
       <div class="col-lg-4"></div>
@@ -60,8 +47,8 @@
             </strong>
             <p>Total Tax: ${{ income|floatformat:2|intcomma }}</p>
             <p>Effective Rate: {{ effectiveRate|floatformat:2|intcomma }}%</p>
-            <p>Monthly Withholding: ${{ withholdAmount|floatformat:2|intcomma }} </p>
-            </p>
+            <p>Withhold: ${{ withholdAmount|floatformat:2|intcomma }} </p>
+            <p>" " </p>
 
           </center>
         </div>
@@ -71,10 +58,10 @@
         <div class="alert alert-success">
           <center>
             <strong><p>Federal</p></strong>
-            <p>Standard Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }} </p>
+            <p>Std. Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }} </p>
             <p>Tax Obligation: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ fedEffectiveRate|floatformat:2|intcomma }} %</p>
-            <p>Monthly Withholding: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
+            <p>Withhold: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
           </center>
         </div>
       </div>
@@ -83,10 +70,10 @@
         <div class="alert alert-info">
           <center>
             <strong><p>State ({{ state }})</p></strong>
-            <p>Standard Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
+            <p>Std. Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
             <p>Tax Obligation: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
-            <p>Monthly Withholding: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
+            <p>Withhold: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
           </center>
         </div>
       </div>
@@ -108,6 +95,11 @@
               <p>Income: ${{ income|floatformat:2|intcomma }}</p>
               <p>State: {{ state }} </p>
               <p>Filing Type: {{ filerType }} </p>
+              </br>
+              <form action="{% url 'home'%}">
+                <input type="submit" value="Go Back" class="btn btn-warning">
+              </form>
+            </center>
           </center>
         </div>
       </div>
@@ -184,7 +176,7 @@
     </div>
 
     <!-- Button Row -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
         <center>
@@ -194,7 +186,7 @@
         </center>
       </div>
       <div class="col-lg-4"></div>
-    </div>
+    </div> -->
 
   </div>
 </body>
