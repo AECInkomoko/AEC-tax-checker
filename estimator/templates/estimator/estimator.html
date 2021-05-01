@@ -35,8 +35,8 @@
     </div>
     </br>
 
-    <!-- Results Row-->
 
+    <!-- Results Row-->
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-2">
@@ -45,7 +45,7 @@
             <strong>
               <p>Summary</p>
             </strong>
-            <p>Total Tax: ${{ income|floatformat:2|intcomma }}</p>
+            <p>Total Tax: ${{ totalTaxAmount|floatformat:2|intcomma }}</p>
             <p>Effective Rate: {{ effectiveRate|floatformat:2|intcomma }}%</p>
             <p>Withhold: ${{ withholdAmount|floatformat:2|intcomma }} </p>
             <p>" " </p>
@@ -58,10 +58,10 @@
         <div class="alert alert-success">
           <center>
             <strong><p>Federal</p></strong>
-            <p>Std. Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }} </p>
-            <p>Tax Obligation: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
+            <p>Tax: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ fedEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Withhold: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
+            <p>[Std. Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }}]</p>
           </center>
         </div>
       </div>
@@ -70,20 +70,20 @@
         <div class="alert alert-info">
           <center>
             <strong><p>State ({{ state }})</p></strong>
-            <p>Std. Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
-            <p>Tax Obligation: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
+            <p>Tax: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Withhold: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
+            <p>[Std. Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }}]</p>
           </center>
         </div>
       </div>
 
       <div class="col-lg-4"></div>
     </div>
-
     </br>
 
-    <!-- Federal + State Tax Brackets Row -->
+
+    <!-- User Input, Federal & State Tax Brackets Row -->
     <div class="row">
       <div class="col-lg-3"></div>
       <div class="col-lg-2">
