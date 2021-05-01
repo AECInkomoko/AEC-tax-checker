@@ -48,58 +48,26 @@
     </div>
     </br>
 
-    <!-- Summary Row -->
-    <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-2">
-        <div class="alert alert-warning">
-          <center>
-            <strong>
-              <p>Income</p>
-            </strong>
-            <p>${{ income|floatformat:2|intcomma }} </p>
-          </center>
-        </div>
-      </div>
-      <div class="col-lg-2">
-        <div class="alert alert-warning">
-          <center>
-            <strong>
-              <p>Total Tax</p>
-            </strong>
-            <p>${{ totalTaxAmount|floatformat:2|intcomma }}</p>
-          </center>
-        </div>
-      </div>
-      <div class="col-lg-2">
-        <div class="alert alert-warning">
-          <center>
-            <strong><p>Effective Rate</p></strong>
-              <p>{{ effectiveRate|floatformat:2|intcomma }} %</p>
-          </center>
-        </div>
-      </div>
-      <div class="col-lg-2">
-        <div class="alert alert-warning">
-          <center>
-            <strong>
-              <p>Withholding </p>
-            </strong>
-            <p>${{ withholdAmount|floatformat:2|intcomma }}</p>
-          </center>
-        </div>
-      </div>
-      <div class="col-lg-2"></div>
-    </div>
-
-    </br>
-
-
-    <!-- Federal + State Row-->
+    <!-- Results Row-->
 
     <div class="row">
       <div class="col-lg-3"></div>
-      <div class="col-lg-3">
+      <div class="col-lg-2">
+        <div class="alert alert-danger">
+          <center>
+            <strong>
+              <p>Summary</p>
+            </strong>
+            <p>Total Tax: ${{ income|floatformat:2|intcomma }}</p>
+            <p>Effective Rate: {{ effectiveRate|floatformat:2|intcomma }}%</p>
+            <p>Monthly Withholding: ${{ withholdAmount|floatformat:2|intcomma }} </p>
+            </p>
+
+          </center>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
         <div class="alert alert-success">
           <center>
             <strong><p>Federal</p></strong>
@@ -107,34 +75,45 @@
             <p>Tax Obligation: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ fedEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Monthly Withholding: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
-            <br>
           </center>
         </div>
       </div>
 
-      <div class="col-lg-3">
-        <div class="alert alert-success">
+      <div class="col-lg-2">
+        <div class="alert alert-info">
           <center>
             <strong><p>State ({{ state }})</p></strong>
             <p>Standard Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }} </p>
             <p>Tax Obligation: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Monthly Withholding: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
-            <br>
           </center>
         </div>
       </div>
 
-      <div class="col-lg-3"></div>
+      <div class="col-lg-4"></div>
     </div>
 
     </br>
 
     <!-- Federal + State Tax Brackets Row -->
     <div class="row">
-      <div class="col-lg-4"></div>
+      <div class="col-lg-3"></div>
       <div class="col-lg-2">
-        <div class="alert alert-info">
+        <div class="alert alert-warning">
+          <center>
+            <strong>
+              <p>User Input</p>
+            </strong>
+              <p>Income: ${{ income|floatformat:2|intcomma }}</p>
+              <p>State: {{ state }} </p>
+              <p>Filing Type: {{ filerType }} </p>
+          </center>
+        </div>
+      </div>
+
+      <div class="col-lg-2">
+        <div class="alert alert-success">
           <center>
             <strong>
               <p>Federal Tax Brackets</p>
@@ -165,8 +144,7 @@
         <br>
       </div>
 
-
-      <!-- State Tax Brackets Row -->
+      <!-- State Tax Brackets -->
       <div class="col-lg-2">
         <div class="alert alert-info">
           <center>
@@ -202,7 +180,7 @@
             {% endif %}
         </div>
       </div>
-      <div class="col-lg-4"></div>
+      <div class="col-lg-2"></div>
     </div>
 
     <!-- Button Row -->

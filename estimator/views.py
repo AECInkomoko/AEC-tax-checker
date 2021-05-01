@@ -71,6 +71,8 @@ def estimator(request):
     return render(request, 'estimator/estimator.html',
         {
           'income':income,
+          'state':state,
+          'filerType':filerType,         
           'totalTaxAmount':totalTaxAmount,
           'effectiveRate':effectiveRate,
           'withholdAmount':withholdAmount,
@@ -78,7 +80,6 @@ def estimator(request):
           'fedTaxAmount':fedTaxAmount,
           'fedEffectiveRate':fedEffectiveRate,
           'fedWithholdAmount':fedWithholdAmount,
-          'state':state,
           'stateStandardDeduction':stateStandardDeduction,
           'stateTaxAmount':stateTaxAmount,
           'stateEffectiveRate':stateEffectiveRate,
