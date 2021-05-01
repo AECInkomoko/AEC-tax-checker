@@ -61,7 +61,7 @@
             <p>Tax: ${{ fedTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ fedEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Withhold: ${{ fedWithholdAmount|floatformat:2|intcomma }} </p>
-            <p>[Std. Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }}]</p>
+            <p>Std. Deduction: ${{ fedStandardDeduction|floatformat:2|intcomma }}</p>
           </center>
         </div>
       </div>
@@ -73,7 +73,7 @@
             <p>Tax: ${{ stateTaxAmount|floatformat:2|intcomma }} </p>
             <p>Effective Rate: {{ stateEffectiveRate|floatformat:2|intcomma }} %</p>
             <p>Withhold: ${{ stateWithholdAmount|floatformat:2|intcomma }} </p>
-            <p>[Std. Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }}]</p>
+            <p>Std. Deduction: ${{ stateStandardDeduction|floatformat:2|intcomma }}</p>
           </center>
         </div>
       </div>
