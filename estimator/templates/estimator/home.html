@@ -18,9 +18,7 @@
     height:auto;
     display:inline-block;
 }
-
 </style>
-
 
 <body>
   <div class="container-fluid">
@@ -29,10 +27,9 @@
     <!-- Input Row-->
       <div class="row">
         <div class="col-lg-4"></div>
-        <div class="col-lg-3">
+        <div class="col-lg-2">
           <br>
           <br>
-
           <div class="alert alert-info">
             <center>
               <H2>Tax Estimator</H2>
@@ -106,25 +103,48 @@
               <option value="WV">West Virginia</option>
               <option value="WY">Wyoming</option>
             <select/>
+
             </br>
             <input type="radio" id="single" name="filerType" value="Single">
             <label for="single">Single</label>
+            </br>
             <input type="radio" id="joint" name="filerType" value="Joint" checked>
             <label for="joint">Married</label>
+            </br>
             <input type="radio" id="head" name="filerType" value="Head">
             <label for="joint">Head of Household</label>
+            </br>
+
           </div>
         </div>
+      </div>
+
+      <!-- Radio Button Row-->
+      <!-- <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-4">
+          <div class="alert alert-info">
+            <center>
+              <input type="radio" id="single" name="filerType" value="Single">
+              <label for="single">Single</label>
+              <input type="radio" id="joint" name="filerType" value="Joint" checked>
+              <label for="joint">Married</label>
+              <input type="radio" id="head" name="filerType" value="Head">
+              <label for="joint">Head of Household</label>
+            </center>
+          </div>
+        </div>
+        <div class="col-lg-4"></div>
+      </div> -->
 
         <!-- Button Row-->
         <div class="row">
-          <div class="col-lg-3"></div>
-          <div class="col-lg-5">
+          <div class="col-lg-2"></div>
+          <div class="col-lg-6">
             <center>
             <input type="submit" value="Estimate My Taxes" class="btn btn-secondary">
             </center>
           </div>
-          <div class="col-lg-4"></div>
         </div>
     </form>
   </div>
