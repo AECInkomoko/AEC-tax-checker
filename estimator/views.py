@@ -51,6 +51,7 @@ def estimator(request):
 
     # Compute Total Tax stuff
     totalTaxAmount = fedTaxAmount + stateTaxAmount
+    totalDeduction = fedStandardDeduction + stateStandardDeduction
     print ("totalTaxAmount " + str(totalTaxAmount))
     print ("income " + income)
     effectiveRate = round(100*int(totalTaxAmount)/int(income), 2)
@@ -72,10 +73,11 @@ def estimator(request):
         {
           'income':income,
           'state':state,
-          'filerType':filerType,         
+          'filerType':filerType,
           'totalTaxAmount':totalTaxAmount,
           'effectiveRate':effectiveRate,
           'withholdAmount':withholdAmount,
+          'totalDeduction':totalDeduction,
           'fedStandardDeduction':fedStandardDeduction,
           'fedTaxAmount':fedTaxAmount,
           'fedEffectiveRate':fedEffectiveRate,
