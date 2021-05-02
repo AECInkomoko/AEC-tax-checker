@@ -29,28 +29,31 @@
     <div class="row">
       <div class="col-lg-4"></div>
       <div class="col-lg-4">
-        <center>
-          <H3 style="color:Gray">Estimated Taxes & Monthly Withholding</H3>
-        </center>
+        <!-- <center>
+          <p class="fs-5 text-dark">Estimated Taxes & Monthly Withholding</p>
+        </center> -->
+        <div class="alert alert-info">
+          <center>
+            <H6>Estimated Taxes & Monthly Withholding</H6>
+          <center>
+        </div>
       </div>
       <div class="col-lg-4"></div>
     </div>
-    </br>
-
 
     <!-- Results Row-->
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-2">
-        <div class="alert alert-warning">
+        <div class="alert alert-info">
           <center>
             <strong>
-              <p>User Input</p>
+              <p>Input</p>
             </strong>
             <p>Income: ${{ income|floatformat:0|intcomma }}</p>
             <p>State: {{ state }} </p>
-            <p>Filing Type: {{ filerType }} </p>
-            <p>Standard Deduction</p>
+            <p>Filer Type: {{ filerType }} </p>
+            <p>[Standard Deduction]</p>
           </center>
         </div>
         <!-- <center>
@@ -85,7 +88,7 @@
       </div>
 
       <div class="col-lg-2">
-        <div class="alert alert-danger">
+        <div class="alert alert-info">
           <center>
             <strong>
               <p>Summary</p>
@@ -111,7 +114,7 @@
         </center>
       </div>
       <div class="col-lg-2">
-        <div class="alert alert-info">
+        <div class="alert alert-secondary">
           <center>
             <strong>
               <p>Tax Brackets (Fed)</p>
@@ -143,7 +146,7 @@
 
       <!-- State Tax Brackets -->
       <div class="col-lg-2">
-        <div class="alert alert-info">
+        <div class="alert alert-secondary">
           <center>
             <strong>
               <p>Tax Brackets ({{ state }})</p>
