@@ -53,11 +53,11 @@
             <p>Standard Deduction</p>
           </center>
         </div>
-        <center>
+        <!-- <center>
           <form action="{% url 'home'%}">
             <input type="submit" value="Go Back" class="btn btn-secondary">
           </form>
-        </center>
+        </center> -->
       </div>
 
       <div class="col-lg-2">
@@ -99,9 +99,17 @@
       </div>
       <div class="col-lg-3"></div>
     </div>
-    <!-- User Input, Federal & State Tax Brackets Row -->
+
+    <!-- Federal & State Tax Brackets Row -->
     <div class="row">
-      <div class="col-lg-4"></div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-2">
+        <center>
+          <form action="{% url 'home'%}">
+            <input type="submit" value="Go Back" class="btn btn-secondary">
+          </form>
+        </center>
+      </div>
       <div class="col-lg-2">
         <div class="alert alert-info">
           <center>
@@ -120,7 +128,7 @@
               {% for arow in fedTaxBracket %}
               <tr>
                 {% if arow.rangeMax == 0 %}
-                <td>{{ "above & beyond" }}</td>
+                <td>{{ "beyond" }}</td>
                     {% else %}
                 <td>${{ arow.rangeMax|floatformat:0|intcomma }}</td>
                     {% endif %}
@@ -156,7 +164,7 @@
                   {% for arow in stateTaxBracket %}
                   <tr>
                     {% if arow.rangeMax == 0 %}
-                    <td>{{ "above & beyond" }}</td>
+                    <td>{{ "beyond" }}</td>
                       {% else %}
                     <td> ${{ arow.rangeMax|floatformat:0|intcomma }}</td>
                       {% endif %}
@@ -167,6 +175,13 @@
               </table>
             {% endif %}
         </div>
+      </div>
+      <div class="col-lg-2">
+        <center>
+          <form action="{% url 'home'%}">
+            <input type="submit" value="Go Back" class="btn btn-secondary">
+          </form>
+        </center>
       </div>
     </div>
 
