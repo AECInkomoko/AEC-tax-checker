@@ -131,7 +131,7 @@
               {% for arow in fedTaxBracket %}
               <tr>
                 {% if arow.rangeMax == 0 %}
-                <td>{{ "beyond" }}</td>
+                <td>{{ "- beyond -" }}</td>
                     {% else %}
                 <td>${{ arow.rangeMax|floatformat:0|intcomma }}</td>
                     {% endif %}
@@ -167,7 +167,7 @@
                   {% for arow in stateTaxBracket %}
                   <tr>
                     {% if arow.rangeMax == 0 %}
-                    <td>{{ "beyond" }}</td>
+                    <td>{{ "- beyond -" }}</td>
                       {% else %}
                     <td> ${{ arow.rangeMax|floatformat:0|intcomma }}</td>
                       {% endif %}
