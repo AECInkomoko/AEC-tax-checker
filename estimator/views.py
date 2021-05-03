@@ -20,7 +20,7 @@ def estimator(request):
     income = request.GET.get('income');
 
     if income :
-      if income == "0" or income == "0.0" :
+      if income == "0" or income == "0.0" or income == "0.00":
         return render(request, 'estimator/estimator.html')
       else :
         income = income.replace(",", "")
