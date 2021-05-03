@@ -41,7 +41,11 @@ class TaxCalculator:
       fedTaxAmount = fedTaxAmount + rowTaxAmount
       # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
       #   " TaxableIncome = " + str(taxableIncome) + " Federal Tax = " + str(fedTaxAmount))
-    percentage = fedTaxAmount / income * 100
+    if income != 0 :
+      percentage = fedTaxAmount / income * 100
+    else :
+      percetnage = 0
+
     print("Federal Percentage: " + str(percentage))
 
     return fedTaxAmount;
@@ -79,18 +83,33 @@ class TaxCalculator:
       # print("ID: " + str(e.id) + " RangeMax: " + str(e.rangeMax) + " RangeRate: " + str(e.rangeRate) +
       #    " TaxableIncome = " + str(taxableIncome) + " State Tax = " + str(stateTaxAmount))
 
-    percentage = (stateTaxAmount / income) * 100
+    if income != 0 :
+      percentage = (stateTaxAmount / income) * 100
+    else :
+      percentage = 0
+
     print("State Tax Percentage: " + str(percentage))
 
     return stateTaxAmount;
 
   # BEGINNING OF THE METHOD getFederalStandardDeduction
-  def getFederalStandardDeduction () :
-    standardDeduction = 25100
-    return standardDeduction
+  def getFederalStandardDeduction (userFilerType) :
+
+    standardDeduction = 0
+
+    if userFilerType == "Single" :
+      standardDeduction = 12400
+    elif userFilerType == "Head" :
+      standardDeduction = 18650
+    else :
+      standardDeduction = 24800
+
+    return standardDeduction;
 
   # BEGINNING OF THE METHOD getStateStandardDeduction
   def getStateStandardDeduction (userFilerType, userState) :
+
+    standardDeduction = 0
 
     if userFilerType == "Head" :
       userFilerType="Joint"

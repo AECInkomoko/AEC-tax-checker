@@ -18,19 +18,26 @@ def estimator(request):
     # Get the input parameters
     filerType = request.GET.get('filerType');
     income = request.GET.get('income');
-    income = income.replace(",", "")
 
-    try:
-      test = decimal.Decimal(income.replace(",", ""))
-    except ValueError:
-      income = 0
+    if income :
+      if income == "0" or income == "0.0" :
+        return render(request, 'estimator/estimator.html')
+      else :
+        income = income.replace(",", "")
+    else :
       return render(request, 'estimator/estimator.html')
+
+    # try:
+    #     test = decimal.Decimal(income)
+    # except ValueError:
+    #   income = 0
+    #   return render(request, 'estimator/estimator.html')
 
     state = request.GET['state'];
 
     # Compute Federal Tax stuff
     tc = TaxCalculator
-    fedStandardDeduction = tc.getFederalStandardDeduction()
+    fedStandardDeduction = tc.getFederalStandardDeduction(filerType)
     taxableIncome = decimal.Decimal(income) - decimal.Decimal(fedStandardDeduction)
     fedTaxAmount = tc.computeFederalTax(taxableIncome, filerType)
     if fedTaxAmount < 0 :
@@ -54,7 +61,7 @@ def estimator(request):
     totalTaxAmount = fedTaxAmount + stateTaxAmount
     totalDeduction = fedStandardDeduction + stateStandardDeduction
     print ("totalTaxAmount " + str(totalTaxAmount))
-    print ("income " + income)
+    print ("income " + str(income))
     effectiveRate = round(100*decimal.Decimal(totalTaxAmount)/decimal.Decimal(income), 2)
     print("effectiveRate " + str(effectiveRate))
     withholdAmount = round(totalTaxAmount/12, 2)
